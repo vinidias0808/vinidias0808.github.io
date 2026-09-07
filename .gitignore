@@ -4,3 +4,6 @@ node_modules/
 
 # ferramentas locais
 .claude/
+
+# saida de build da Vercel
+public/

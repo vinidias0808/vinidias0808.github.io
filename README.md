@@ -32,7 +32,29 @@ index.html            página (única fonte de verdade das classes)
 src/input.css         diretivas do Tailwind + CSS autoral
 assets/styles.css     CSS compilado — versionado, é o que o Pages serve
 tailwind.config.js    tema (fontes, cores bone/ink)
+scripts/stage.mjs     monta public/ para a Vercel
+vercel.json           build e diretório de saída da Vercel
 ```
+
+## Publicação
+
+O site é servido **da raiz do repositório**, e não de uma pasta `public/`.
+Isso é exigência do GitHub Pages e é o motivo de `assets/styles.css` ser
+versionado.
+
+A Vercel, por outro lado, roda o build e depois procura uma pasta de saída.
+Sem isso ela falha com:
+
+> No Output Directory named "public" found after the Build completed.
+
+Por isso o `vercel.json` aponta para `npm run vercel-build`, que compila o CSS
+e copia `index.html` + `assets/` para `public/`. A pasta é descartável e está
+no `.gitignore` — a raiz continua sendo a fonte de verdade para os dois hosts.
+
+| Host          | Publica de | Comando                |
+| ------------- | ---------- | ---------------------- |
+| GitHub Pages  | raiz       | nenhum (serve estático) |
+| Vercel        | `public/`  | `npm run vercel-build` |
 
 ## Desenvolvimento
 
